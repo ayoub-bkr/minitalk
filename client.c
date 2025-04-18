@@ -15,5 +15,16 @@
 int	main(int ac, char **av)
 {
 	__pid_t	pid = ft_atoi(av[1]);
-	kill(pid, SIGUSR2);
+	int	i = 7;
+	unsigned char	byte;
+	byte = 2;
+	while (i >= 0)
+	{
+		if ((byte >> i) & 1)
+			kill(pid, SIGUSR1);
+		else if (!((byte >> i) & 1))
+			kill(pid, SIGUSR2);
+		i--;
+		usleep(100);
+	}
 }
