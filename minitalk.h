@@ -13,8 +13,19 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <signal.h>
-int	ft_atoi(char *str);
+#include <stdlib.h>
+
+//utils.c
+int		ft_strlen(char *str);
+int		ft_atoi(char *str);
 void	ft_putnbr(int n);
+
+typedef struct s_data {
+	int		i;
+	int		j;
+	int		len;
+	__pid_t	pid;
+}			c_data;
 // struct sigaction {
 // 	void     (*sa_handler)(int);
 // 	void     (*sa_sigaction)(int, siginfo_t *, void *);
