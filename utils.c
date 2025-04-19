@@ -20,7 +20,7 @@ void	erroring(void)
 
 int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -38,12 +38,12 @@ int	ft_atoi(char *str)
 	sign = 1;
 	result = 0;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32 || str[i] == '0')
-	i++;
+		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
-	if (str[i] == '-')
+		if (str[i] == '-')
 			sign *= -1;
-	i++;
+		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{

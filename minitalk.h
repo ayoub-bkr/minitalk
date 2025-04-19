@@ -10,27 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
 #include <signal.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-//utils.c
-void	erroring(void);
-int		ft_strlen(char *str);
-int		ft_atoi(char *str);
-void	ft_putnbr(int n);
+// utils.c
+void		erroring(void);
+int			ft_strlen(char *str);
+int			ft_atoi(char *str);
+void		ft_putnbr(int n);
 
-typedef struct s_data {
+typedef struct s_data
+{
 	int		i;
-	int		j;
 	int		len;
 	__pid_t	pid;
-}			c_data;
-// struct sigaction {
-// 	void     (*sa_handler)(int);
-// 	void     (*sa_sigaction)(int, siginfo_t *, void *);
-// 	sigset_t   sa_mask;
-// 	int        sa_flags;
-// 	void     (*sa_restorer)(void);
-// };
+}			t_data;

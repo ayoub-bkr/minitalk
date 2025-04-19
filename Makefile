@@ -19,7 +19,6 @@ CLNT_BONUS = client_bonus
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-
 all: $(SERV) $(CLNT)
 
 $(SERV): $(SERV_OBJ)
@@ -27,7 +26,6 @@ $(SERV): $(SERV_OBJ)
 
 $(CLNT): $(CLNT_OBJ)
 	$(CC) $(CFLAGS) $(CLNT_OBJ) -o $@
-
 
 bonus: $(SERV_BONUS) $(CLNT_BONUS)
 
@@ -37,6 +35,8 @@ $(SERV_BONUS): $(SERV_OBJ_BONUS)
 $(CLNT_BONUS): $(CLNT_OBJ_BONUS)
 	$(CC) $(CFLAGS) $(CLNT_OBJ_BONUS) -o $@
 
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(SERV_OBJ) $(CLNT_OBJ) $(SERV_OBJ_BONUS) $(CLNT_OBJ_BONUS)

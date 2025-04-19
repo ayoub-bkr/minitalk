@@ -12,10 +12,10 @@
 
 #include "minitalk.h"
 
-int	g_tracker;
+int		g_tracker;
 
 void	waiting(int sig)
-{	
+{
 	if (sig == SIGUSR1)
 		g_tracker = 1;
 }
@@ -40,24 +40,24 @@ void	sending(char byte, __pid_t pid)
 		b--;
 		while (!g_tracker)
 			pause();
-		g_tracker = 0;	
+		g_tracker = 0;
 	}
 }
 
 int	main(int ac, char **av)
 {
+	t_data	data;
+
 	if (ac == 3)
 	{
-		c_data	data;
-		
-		data.j = 0;
+		data.i = 0;
 		data.len = ft_strlen(av[2]);
 		data.pid = ft_atoi(av[1]);
 		if (data.pid <= 0)
 			erroring();
 		signal(SIGUSR1, waiting);
-		while (data.j <= data.len)
-			sending(av[2][data.j++], data.pid);
+		while (data.i <= data.len)
+			sending(av[2][data.i++], data.pid);
 	}
 	else
 	{

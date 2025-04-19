@@ -12,22 +12,22 @@
 
 #include "minitalk.h"
 
-__pid_t	old_pid = 0;
+__pid_t	g_old_pid = 0;
 
 void	printer(int sig, siginfo_t *info, void *context)
 {
-	(void)context;
-	static int	i;
-	static unsigned char byte;
-	__pid_t pid;
+	static int				i;
+	static unsigned char	byte;
+	__pid_t					pid;
 
+	(void)context;
 	pid = info->si_pid;
-	if (old_pid != pid)
+	if (g_old_pid != pid)
 	{
 		byte = 0;
 		i = 0;
 	}
-	old_pid = pid;
+	g_old_pid = pid;
 	if (sig == SIGUSR1)
 		byte = byte | (1 << (7 - i));
 	i++;
@@ -41,10 +41,11 @@ void	printer(int sig, siginfo_t *info, void *context)
 	}
 	kill(info->si_pid, SIGUSR1);
 }
-int	main()
+
+int	main(void)
 {
-	__pid_t	pid;
-	struct sigaction siga;
+	__pid_t				pid;
+	struct sigaction	siga;
 
 	pid = getpid();
 	write(1, "PID = ", 6);
@@ -58,4 +59,3 @@ int	main()
 		pause();
 	return (0);
 }
-
