@@ -16,6 +16,7 @@
 #include <stdlib.h>
 
 //utils.c
+void	erroring(void);
 int		ft_strlen(char *str);
 int		ft_atoi(char *str);
 void	ft_putnbr(int n);

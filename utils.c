@@ -12,6 +12,12 @@
 
 #include "minitalk.h"
 
+void	erroring(void)
+{
+	write(2, "Error! Invalid pid !\n", 21);
+	exit(1);
+}
+
 int	ft_strlen(char *str)
 {
 	int i;
@@ -24,14 +30,14 @@ int	ft_strlen(char *str)
 
 int	ft_atoi(char *str)
 {
-	int	i;
-	int	sign;
-	int	result;
+	int		i;
+	int		sign;
+	long	result;
 
 	i = 0;
 	sign = 1;
 	result = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32 || str[i] == '0')
 	i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
@@ -41,10 +47,14 @@ int	ft_atoi(char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-	result *= 10;
-	result += (str[i++] - 48);
+		result *= 10;
+		result += (str[i++] - 48);
+		if (result > 2147483647)
+			erroring();
 	}
-	return (result * sign);
+	if (str[i])
+		erroring();
+	return ((int)result * sign);
 }
 
 void	ft_putnbr(int n)

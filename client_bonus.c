@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aboukent <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/17 19:45:55 by aboukent          #+#    #+#             */
-/*   Updated: 2025/04/17 19:45:58 by aboukent         ###   ########.fr       */
+/*   Created: 2025/04/19 10:23:36 by aboukent          #+#    #+#             */
+/*   Updated: 2025/04/19 10:23:37 by aboukent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 int	g_tracker;
 
 void	waiting(int sig)
-{	
-	if (sig == SIGUSR1)
+{
+	if (sig == SIGUSR2)
+		write(1, "Message received successfully! 👌\n", 36);
+	else if (sig == SIGUSR1)
 		g_tracker = 1;
 }
 
@@ -56,6 +58,7 @@ int	main(int ac, char **av)
 		if (data.pid <= 0)
 			erroring();
 		signal(SIGUSR1, waiting);
+		signal(SIGUSR2, waiting);
 		while (data.j <= data.len)
 			sending(av[2][data.j++], data.pid);
 	}
